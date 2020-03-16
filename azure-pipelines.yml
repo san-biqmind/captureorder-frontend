@@ -3,6 +3,19 @@
 # Add steps that use Docker Compose, tag images, push to a registry, run an image, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
+variables:
+  
+  - group: frontend-variables # Variable Group containing dockerhub userid and password
+
+  - name: dockerRegistryServiceConnection
+    value: 'containerRegistryConnection' # make sure it matches the name you used in the service connection
+  
+  - name: acrEndpoint
+    value: 'akstest2020.azurecr.io' # replace with container registry endpoint
+
+  - name: tag
+    value: '$(Build.BuildId)'
+
 name: $(build.sourceBranchName)-$(Date:yyyyMMdd)$(Rev:.r)
 pool:
   vmImage: 'Ubuntu 16.04'
